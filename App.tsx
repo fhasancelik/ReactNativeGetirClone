@@ -5,18 +5,18 @@ import {
 import {colors} from './src/utils/utils'
 
 
-import HomeScreen from './src/screens/Home'
+import HomeScreen from './src/screens/HomeScreen'
+import { NavigationContainer } from '@react-navigation/native';
 
-
-
+import RootNavigators from './src/navigators/RootNavigators';
 function App(): JSX.Element {
   
 
 
   return (
-    <SafeAreaView style={styles.container}>
-     <HomeScreen/>
-    </SafeAreaView>
+<NavigationContainer>
+  <RootNavigators/>
+</NavigationContainer>
   );
 }
 const styles=StyleSheet.create({
