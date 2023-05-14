@@ -2,14 +2,20 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {colors, screenValue} from '../utils/utils';
 import {Category} from './models';
+import { useNavigation } from '@react-navigation/native';
 
 type categoryItemProps = {
   item: Category;
 };
 
 const CategoryItem = ({item}: categoryItemProps) => {
+
+const navigation=useNavigation()
+
   return (
     <TouchableOpacity
+
+    onPress={()=>navigation.navigate('CategoryFilterScreen',{category:item})}
       style={{
         marginTop: 10,
         width: screenValue.width * 0.25,
