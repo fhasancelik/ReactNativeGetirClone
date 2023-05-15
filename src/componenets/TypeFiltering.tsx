@@ -60,7 +60,9 @@ onPress={()=>setCategory(item)}
         height: screenValue.height * 0.07,
         backgroundColor: colors.white,
         paddingVertical:screenValue.height*0.014,
-        paddingHorizontal:12
+        paddingHorizontal:12,
+        borderBottomColor:'lightgrey',
+        borderBottomWidth:1
 
       }}
       renderItem={({item}) => {
