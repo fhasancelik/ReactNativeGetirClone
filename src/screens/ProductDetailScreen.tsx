@@ -4,6 +4,7 @@ import { productItemType } from '../componenets/ProductItem'
 import ImageCarousel from '../componenets/ImageCarousel'
 import { colors } from '../utils/utils'
 import { Product } from '../componenets/models'
+import DetailBox from '../componenets/DetailBox'
 
 const ProductDetail = (props) => {
 const[product,setProduct]=useState<Product>(props.route.params.product)
@@ -18,6 +19,7 @@ if(!product){
   return (
     <View>
       <ImageCarousel images={product.images}/>
+      <DetailBox price={product.fiyat} name={product.name} quantity={product.miktar}  />
     </View>
   )
 }

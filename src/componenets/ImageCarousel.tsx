@@ -49,7 +49,7 @@ if(viewableItems.viewableItems.length>0){
         height: screenValue.height * 0.21,
       }}
 
-snapToInterval={screenValue.width}
+snapToInterval={screenValue.width * 0.5}
 snapToAlignment='center'
 decelerationRate={'fast'}
       renderItem={({item}) => {
