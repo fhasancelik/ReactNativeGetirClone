@@ -22,6 +22,7 @@ export const colors={
     gray2:'#F3F2FD',
     gray3:'#959595',
     gray4:'#F0EFF7',
+    gray5:'#F3EFFE',
     black:'#616161',
     black2:'#747990',
     black3:'#808B99'
