@@ -5,12 +5,16 @@ import Icon from 'react-native-vector-icons/Entypo'
 import { Product } from './models'
 import { useNavigation } from '@react-navigation/core'
 
+import {connect} from 'react-redux';
+import * as actions from '../redux/actions/cartactions'
+
 export type productItemType={
     item:Product
+    addItemToCart:(a:Product)=>void
 }
 
 
-const ProductItem = ({item}:productItemType) => {
+const ProductItem = ({item,addItemToCart}:productItemType) => {
 
 const navigation=useNavigation()
 
@@ -86,7 +90,7 @@ borderColor:colors.gray3
 
 <TouchableOpacity
 
-onPress={()=>console.log('icon')}
+onPress={()=>addItemToCart(item)}
 
 
 style={{
@@ -118,7 +122,12 @@ style={{
 </TouchableOpacity>
   )
 }
-
-export default ProductItem
-
-const styles = StyleSheet.create({})
+const mapDispatchProps = (dispatch) => {
+    
+    return {
+     addItemToCart:(product:Product)=>
+     dispatch(actions.addToCart({quantity:1,product}))
+    };
+  };
+  
+  export default connect(null,mapDispatchProps)(ProductItem);

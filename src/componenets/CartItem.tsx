@@ -37,7 +37,11 @@ const {name,image,miktar,fiyat}=product
         
       }}>
 <Image style={{
-    width:screenValue.height*0.09,height:screenValue.height*0.09
+    width:screenValue.height*0.09,height:screenValue.height*0.09,
+    borderWidth:0.4,
+    borderColor:'lightgray',
+    borderRadius:6,
+    
 }} source={{uri:image}}/>
 
 <View style={{
