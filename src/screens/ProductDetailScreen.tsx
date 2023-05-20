@@ -7,9 +7,11 @@ import { Product } from '../componenets/models'
 import DetailBox from '../componenets/DetailBox'
 import DetailProperty from '../componenets/DetailProperty'
 import CardButton from '../componenets/CardButton'
+import {connect} from 'react-redux';
+import * as actions from '../redux/actions/cartactions'
 
-const ProductDetail = (props) => {
-const[product,setProduct]=useState<Product>(props.route.params.product)
+const ProductDetail = ({route}) => {
+const[product,setProduct]=useState<Product>(route.params.product)
     //console.log(product)
 
 if(!product){
@@ -44,11 +46,17 @@ if(!product){
     
     </View>
   </ScrollView>
-  <CardButton/>
+  <CardButton product={product}/>
 </View>
   )
 }
 
-export default ProductDetail
+const mapDispatchToProps = (dispatch) => {
+    
+  return {
+   addItemToCart:(product:Product)=>
+   dispatch(actions.addToCart({quantity:1,product}))
+  };
+};
 
-const styles = StyleSheet.create({})
+export default connect(null,mapDispatchToProps)(ProductDetail);

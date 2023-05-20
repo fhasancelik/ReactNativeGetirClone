@@ -122,7 +122,7 @@ style={{
 </TouchableOpacity>
   )
 }
-const mapDispatchProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     
     return {
      addItemToCart:(product:Product)=>
@@ -130,4 +130,4 @@ const mapDispatchProps = (dispatch) => {
     };
   };
   
-  export default connect(null,mapDispatchProps)(ProductItem);
+  export default connect(null,mapDispatchToProps)(ProductItem);

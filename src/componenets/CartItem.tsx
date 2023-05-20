@@ -3,13 +3,15 @@ import React from 'react'
 import { Product } from './models'
 import { colors, screenValue } from '../utils/utils'
 
-
+import {connect} from 'react-redux';
+import * as actions from '../redux/actions/cartactions'
 type CartItemProps={
-product:Product
+product:Product,
+quantity:number
 
 }
 
-const CartItem = ({product}:CartItemProps) => {
+const CartItem = ({product,quantity,removeCart}:CartItemProps) => {
 
 const {name,image,miktar,fiyat}=product
 
@@ -89,7 +91,19 @@ shadowColor:'gray'
 
       }}>
 
-<TouchableOpacity style={{
+<TouchableOpacity 
+
+
+
+
+
+onPress={()=>removeCart(product)}
+
+
+
+
+
+style={{
   flex:1,
   alignItems:'center'
 }}>
@@ -110,7 +124,7 @@ shadowColor:'gray'
     ,
     color:colors.white
   }}
-  >5</Text>
+  >{quantity}</Text>
 </View>
 
 <TouchableOpacity style={{
@@ -126,6 +140,22 @@ shadowColor:'gray'
   )
 }
 
-export default CartItem
 
-const styles = StyleSheet.create({})
+const mapStateToProps = (state) => {
+  const {cartItems} = state;
+  return {
+    cartItems: cartItems,
+  
+  };
+};
+
+
+const mapDispatchToProps = (dispatch) => {
+    
+  return {
+   removeCart:(product)=>
+   dispatch(actions.removeFromCart(product))
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps )(CartItem);

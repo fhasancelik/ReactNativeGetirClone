@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import productsGetir from '../../assets/productsGetir';
 import CartItem from '../componenets/CartItem';
 import {colors, screenValue} from '../utils/utils';
@@ -16,6 +16,26 @@ import {connect} from 'react-redux';
 import { Product } from '../componenets/models';
 
 const CartScreen = ({cartItems}:{cartItems:{product:Product,quantity:number[]}}) => {
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  function getAllProductPrice() {
+
+let total=0
+cartItems.map((item)=>{
+  let price=(total += item.product.fiyat)
+  setTotalPrice(price)
+})
+
+cartItems.length ? null : setTotalPrice(0)
+  }
+
+  //console.log(cartItems)
+
+  useEffect(() => {
+    getAllProductPrice();
+  }, [cartItems]);
+
+  //console.log(cartItems)
   return (
     <View
       style={{
@@ -24,7 +44,7 @@ const CartScreen = ({cartItems}:{cartItems:{product:Product,quantity:number[]}})
       <ScrollView>
         <FlatList
           data={cartItems}
-          renderItem={({item}) => <CartItem product={item.product} />}
+          renderItem={({item}) => <CartItem product={item.product} quantity={item.quantity} />}
         />
 
         <Text
@@ -98,18 +118,18 @@ const CartScreen = ({cartItems}:{cartItems:{product:Product,quantity:number[]}})
             borderTopRightRadius: 8,
             borderBottomRightRadius: 8,
           }}>
-          <Text>₺24,00</Text>
+          <Text>${totalPrice.toFixed(2)}</Text>
         </View>
       </View>
     </View>
   );
 };
 
-const mapStateProps = (state) => {
+const mapStateToProps = (state) => {
   const {cartItems} = state;
   return {
     cartItems: cartItems,
   };
 };
 
-export default connect(mapStateProps, null)(CartScreen);
+export default connect(mapStateToProps, null)(CartScreen);
